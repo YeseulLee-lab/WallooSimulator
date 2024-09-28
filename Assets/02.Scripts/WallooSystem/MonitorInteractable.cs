@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
-public class MonitorInteractable : MonoBehaviour
+public class MonitorInteractable : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private Image black;
 
-    // Update is called once per frame
-    void Update()
+    public override void PlayWallooAction()
     {
-        
+        GetComponent<BoxCollider>().enabled = false;
+
+        black.DOFade(0f, 0.8f).OnComplete(() =>
+        {
+            black.gameObject.SetActive(false);
+        });
+
+        WallooManager.instance.isWorkStart = true;
     }
 }
