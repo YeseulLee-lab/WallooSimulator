@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Interactable : MonoBehaviour
+public class Interactable : XRBaseInteractable
 {
     private Animator _animator;
     [SerializeField]
