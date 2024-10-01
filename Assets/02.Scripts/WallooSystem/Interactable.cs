@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Interactable : XRBaseInteractable
@@ -13,18 +14,23 @@ public class Interactable : XRBaseInteractable
     [SerializeField]
     private float _doubtRate;
 
+    protected bool isTriggered;
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
     }
 
-    public virtual void PlayWallooAction()
+    public virtual void PlayWallooAction(SelectEnterEventArgs args)
     {
-        _animator.enabled = true;
-    }
+        if (WallooManager.instance.isWallooing)
+        {
+            return;
+        }
 
-    public virtual void HoverAction()
-    {
+        if(_animator != null)
+            _animator.enabled = true;
 
+        WallooManager.instance.isWallooing = true;
     }
 }

@@ -1,0 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class Timer : MonoBehaviour
+{
+    private TextMeshProUGUI _timeTMP;
+
+    private void Start()
+    {
+        _timeTMP = GetComponent<TextMeshProUGUI>();
+    }
+
+
+}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class WallooManager : MonoBehaviour
 {
@@ -47,10 +48,26 @@ public class WallooManager : MonoBehaviour
         }
     }
 
+    private bool _isWallooing;
+    public bool isWallooing
+    {
+        get
+        {
+            return _isWallooing;
+        }
+        set
+        {
+            _isWallooing = value;
+        }
+    }
+
     #region Unity Life Cycle
     private void Awake()
     {
         instance = this;
     }
+
     #endregion
+
+    //UniTask 시간흐름 구현
 }

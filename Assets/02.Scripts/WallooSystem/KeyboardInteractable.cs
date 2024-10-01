@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class KeyboardInteractable : XRSimpleInteractable
+public class KeyboardInteractable : Interactable
 {
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
     {
@@ -11,12 +11,17 @@ public class KeyboardInteractable : XRSimpleInteractable
 
         if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Dynamic)
         {
-            if(isSelected)
-                PlayWallooAction();
+            /*if(isSelected)
+                PlayWallooAction();*/
         }
     }
 
-    public void PlayWallooAction()
+    public override void AttachCustomReticle(IXRInteractor interactor)
+    {
+        Debug.Log("Grab");
+    }
+
+    public override void PlayWallooAction(SelectEnterEventArgs args)
     {
         //base.PlayWallooAction();
 
