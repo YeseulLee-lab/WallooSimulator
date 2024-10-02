@@ -14,6 +14,7 @@ public class MonitorInteractable : Interactable
     private void Start()
     {
         selectEntered.AddListener(PlayWallooAction);
+        selectExited.AddListener(SelectExit);
     }
 
     public override void PlayWallooAction(SelectEnterEventArgs args)
@@ -29,5 +30,10 @@ public class MonitorInteractable : Interactable
 
         //모니터를 켜야 일 시작함
         WallooManager.instance.isWorkStart = true;
+    }
+
+    public void SelectExit(SelectExitEventArgs args)
+    {
+        Debug.Log("선택 취소");
     }
 }
