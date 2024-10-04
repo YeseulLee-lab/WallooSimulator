@@ -11,10 +11,14 @@ public class MonitorInteractable : Interactable
     [SerializeField]
     private Image black;
 
+    private Transform initialTransform;
+
     private void Start()
     {
         selectEntered.AddListener(PlayWallooAction);
         selectExited.AddListener(SelectExit);
+
+        initialTransform = transform;
     }
 
     public override void PlayWallooAction(SelectEnterEventArgs args)
@@ -35,5 +39,15 @@ public class MonitorInteractable : Interactable
     public void SelectExit(SelectExitEventArgs args)
     {
         Debug.Log("선택 취소");
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 0)
+        {
+            gameObject.transform.position = initialTransform.position;
+            gameObject.transform.rotation = initialTransform.rotation;
+        }
     }
 }
