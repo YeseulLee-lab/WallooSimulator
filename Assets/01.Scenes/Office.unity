@@ -1069,6 +1069,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c778c543048994b95f16b9fb952d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wallooScoreText: {fileID: 149948135}
+  _youtubeBtn: {fileID: 1908893422}
+  _workBtn: {fileID: 1137754325}
+  _offBtn: {fileID: 319911590}
+  _timer: {fileID: 1119177840}
 --- !u!1 &319911588
 GameObject:
   m_ObjectHideFlags: 0
@@ -2630,6 +2635,7 @@ GameObject:
   - component: {fileID: 1119177838}
   - component: {fileID: 1119177837}
   - component: {fileID: 1119177839}
+  - component: {fileID: 1119177840}
   m_Layer: 5
   m_Name: Text - Time(TMP)
   m_TagString: Untagged
@@ -2653,7 +2659,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -10, y: 5}
+  m_AnchoredPosition: {x: -10, y: 48}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1119177837
@@ -2769,6 +2775,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &1119177840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119177835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3fb38f14c12f14d8ad8858eb62da79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1136704902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5137,7 +5155,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1812203568}
-  - component: {fileID: 1812203569}
   m_Layer: 0
   m_Name: WallooManager
   m_TagString: Untagged
@@ -5160,18 +5177,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1812203569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812203567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c778c543048994b95f16b9fb952d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1859355128
 GameObject:
   m_ObjectHideFlags: 0
