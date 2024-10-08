@@ -2,13 +2,13 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Interactable : XRBaseInteractable
+public class CustomInteractableBase : MonoBehaviour
 {
     //오브젝트 데이터
-    public InteractableData _interactableData;
+    [SerializeField]
+    protected InteractableData _interactableData;
     protected Transform originTransform;
     protected bool _isWallooing;
 
@@ -22,8 +22,8 @@ public class Interactable : XRBaseInteractable
     protected virtual void Start()
     {
         _animator = GetComponent<Animator>();
-        selectEntered.AddListener(PlayWallooAction);
-        selectExited.AddListener(SelectExit);
+        GetComponent<XRBaseInteractable>().selectEntered.AddListener(PlayWallooAction);
+        GetComponent<XRBaseInteractable>().selectExited.AddListener(SelectExit);
 
         originTransform = transform;
     }
@@ -37,6 +37,7 @@ public class Interactable : XRBaseInteractable
         {
             Debug.Log("월루 행동시작");
             _isWallooing = true;
+            WallooManager.instance.doubtRate += _interactableData.doubtRate;
             if (_animator != null)
                 _animator.enabled = true;
 
@@ -48,11 +49,23 @@ public class Interactable : XRBaseInteractable
         }
     }
 
-    //Grip 버튼 Up
+    //Grip Button Up
     public virtual void SelectExit(SelectExitEventArgs args)
     {
         if (_animator != null)
-            _animator.enabled = false;
+            _animator.SetBool("isWallooing", false);
+
+        GetComponent<XRBaseInteractable>().selectEntered.RemoveAllListeners();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //바닥에 닿으면 원래자리로 돌아감
+        if (collision.gameObject.layer == 0)
+        {
+            gameObject.transform.position = originTransform.position;
+            gameObject.transform.rotation = originTransform.rotation;
+        }
     }
     #endregion
 
@@ -85,58 +98,3 @@ public class Interactable : XRBaseInteractable
     #endregion
 }
 
-[Serializable]
-public class InteractableData
-{
-    private string _name;
-    private float _skipTime;
-    private int _wallooScore;
-    private float _doubtRate;
-    private float _coolTime;
-
-    public InteractableData(string name, float skipTime, int wallooScore, float doubtRate, float coolTime)
-    {
-        _name = name;
-        _skipTime = skipTime;
-        _wallooScore = wallooScore;
-        _doubtRate = doubtRate;
-        _coolTime = coolTime;
-    }
-
-    public string name
-    {
-        get { return _name; }
-    }
-
-    public float skipTime
-    {
-        get
-        {
-            return _skipTime;
-        }
-    }
-
-    public float wallooScoreme
-    {
-        get
-        {
-            return _wallooScore;
-        }
-    }
-
-    public float doubtRate
-    {
-        get
-        {
-            return _doubtRate;
-        }
-    }
-
-    public float coolTime
-    {
-        get
-        {
-            return _coolTime;
-        }
-    }
-}

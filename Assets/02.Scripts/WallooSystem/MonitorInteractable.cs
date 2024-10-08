@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class MonitorInteractable : Interactable
+public class MonitorInteractable : CustomInteractableBase
 {
     [SerializeField]
     private Image black;
@@ -14,8 +14,6 @@ public class MonitorInteractable : Interactable
     protected override void Start()
     {
         base.Start();
-        
-        _interactableData = new InteractableData("╦П╢оем", 0f, 0, 0f, 0f);
     }
     #endregion
 

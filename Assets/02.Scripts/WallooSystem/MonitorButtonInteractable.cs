@@ -4,6 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonitorButtonInteractable : Interactable
+public class MonitorButtonInteractable : CustomInteractableBase
 {
 }

@@ -9,7 +9,7 @@ public class WallooManager : MonoBehaviour
 {
     public static WallooManager instance;
 
-    private Interactable _curWallooInteractable;
+    private CustomInteractableBase _curWallooInteractable;
 
     private float _wallooScore;
     public float wallooScore
@@ -33,8 +33,16 @@ public class WallooManager : MonoBehaviour
         }
         set
         {
-            _doubtRate = value;
-            _doubtRateChangedAction?.Invoke(_doubtRate);
+            if (_doubtRate >= 100f)
+            {
+                _doubtRate = 100f;
+                Debug.Log("게임종료");
+            }
+            else
+            {
+                _doubtRate = value;
+                _doubtRateChangedAction?.Invoke(_doubtRate);
+            }
         }
     }
 
