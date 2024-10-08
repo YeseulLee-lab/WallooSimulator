@@ -33,13 +33,4 @@ public class MonitorInteractable : CustomInteractableBase
         //모니터를 켜야 일 시작함
         WallooManager.instance.isWorkStart = true;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 0)
-        {
-            gameObject.transform.position = originTransform.position;
-            gameObject.transform.rotation = originTransform.rotation;
-        }
-    }
 }
