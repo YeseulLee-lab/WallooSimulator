@@ -3061,14 +3061,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136704902}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.8758819, z: -0, w: 0.48252553}
-  m_LocalPosition: {x: 1.598, y: 0.344, z: 0.93}
+  m_LocalRotation: {x: -0, y: -0.8970722, z: -0, w: 0.44188398}
+  m_LocalPosition: {x: 1.293, y: 0.344, z: 0.857}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 972196378}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -122.299, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -127.552, z: 0}
 --- !u!114 &1136704906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3599,7 +3599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3611,7 +3611,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -4663,9 +4663,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  _wallooTime: 0
-  _walloScore: 0
-  _doubtRate: 0
 --- !u!1 &1628087333
 GameObject:
   m_ObjectHideFlags: 0
@@ -9045,9 +9042,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  _wallooTime: 0
-  _walloScore: 0
-  _doubtRate: 0
   black: {fileID: 1252089009}
 --- !u!65 &7800791546056499878
 BoxCollider:
@@ -9599,9 +9593,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  _wallooTime: 0
-  _walloScore: 0
-  _doubtRate: 0
 --- !u!4 &8747535531869591635
 Transform:
   m_ObjectHideFlags: 0

@@ -14,8 +14,8 @@ public class Interactable : XRBaseInteractable
     private Animator _animator;
 
     //coolTime
-    protected float _curCoolTime;
-    private CancellationTokenSource _coolTimeCancel = new CancellationTokenSource();
+    protected float _curCoolTime = 0f;
+    protected CancellationTokenSource _coolTimeCancel = new CancellationTokenSource();
 
     #region Unity Life Cycle
     protected virtual void Start()
@@ -39,8 +39,9 @@ public class Interactable : XRBaseInteractable
         WallooManager.instance.isWallooing = true;
 
         //쿨타임이 다 찼으면 월루 행동 가능
-        if (_curCoolTime >= _interactableData.coolTime)
+        if (_curCoolTime <= 0f)
         {
+            Debug.Log("월루 행동시작");
             if (_animator != null)
                 _animator.enabled = true;
 
@@ -54,7 +55,6 @@ public class Interactable : XRBaseInteractable
 
     public virtual void SelectExit(SelectExitEventArgs args)
     {
-        Debug.Log("선택 취소");
         WallooManager.instance.isWallooing = false;
 
         if (_animator != null)
@@ -65,17 +65,19 @@ public class Interactable : XRBaseInteractable
     #region CoolTime
     async UniTaskVoid UniCoolTime()
     {
-        while (true)
+        while (_interactableData.coolTime > 0f)
         {
             if (_coolTimeCancel.IsCancellationRequested)
             {
+                Debug.Log("unitask 취소");
                 _curCoolTime = 0f;
                 break;
             }
 
             //총 쿨타임 만큼 _curCoolTime 플러스
-            await UniTask.Delay(TimeSpan.FromSeconds(1f), _curCoolTime < _interactableData.coolTime, cancellationToken: _coolTimeCancel.Token);
+            await UniTask.Delay(TimeSpan.FromSeconds(1f), _curCoolTime >= _interactableData.coolTime, cancellationToken: _coolTimeCancel.Token);
             _curCoolTime += 1f;
+            Debug.Log(_interactableData.name + "쿨타임: " + _curCoolTime);
         }
     }
     #endregion
@@ -84,17 +86,24 @@ public class Interactable : XRBaseInteractable
 [Serializable]
 public class InteractableData
 {
+    private string _name;
     private float _wallooTime;
     private int _wallooScore;
     private float _doubtRate;
     private float _coolTime;
 
-    public InteractableData(float wallooTime, int wallooScore, float doubtRate, float coolTime)
+    public InteractableData(string name, float wallooTime, int wallooScore, float doubtRate, float coolTime)
     {
+        _name = name;
         _wallooTime = wallooTime;
         _wallooScore = wallooScore;
         _doubtRate = doubtRate;
         _coolTime = coolTime;
+    }
+
+    public string name
+    {
+        get { return _name; }
     }
 
     public float wallooTime

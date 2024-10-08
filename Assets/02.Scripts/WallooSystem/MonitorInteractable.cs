@@ -15,7 +15,7 @@ public class MonitorInteractable : Interactable
     {
         base.Start();
         
-        _interactableData = new InteractableData(0f, 0, 0f, 0f);
+        _interactableData = new InteractableData("¸ğ´ÏÅÍ", 0f, 0, 0f, 0f);
     }
     #endregion
 

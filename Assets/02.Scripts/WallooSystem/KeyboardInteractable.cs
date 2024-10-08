@@ -7,7 +7,7 @@ public class KeyboardInteractable : Interactable
     {
         base.Start();
 
-        _interactableData = new InteractableData(0f, 0, -22f, 20f);
+        _interactableData = new InteractableData("키보드", 0f, 0, -22f, 20f);
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -16,8 +16,11 @@ public class KeyboardInteractable : Interactable
 
         if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Dynamic)
         {
-            if (isSelected)
-                Debug.Log("타자치는중");
+            if (_coolTimeCancel.IsCancellationRequested)
+            {
+                if (isSelected)
+                    Debug.Log("타자치는중");
+            }
         }
     }
 

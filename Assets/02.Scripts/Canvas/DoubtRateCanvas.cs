@@ -10,7 +10,7 @@ public class DoubtRateCanvas : MonoBehaviour
     private Image _doubtRateBar;
 
     #region Unity Life Cycle
-    private void Awake()
+    private void Start()
     {
         WallooManager.instance._doubtRateChangedAction = (rate) => DoubtRateChange(rate);
     }

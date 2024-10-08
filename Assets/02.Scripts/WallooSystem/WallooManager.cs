@@ -82,6 +82,5 @@ public class WallooManager : MonoBehaviour
 
     private void InitData()
     {
-        doubtRate = 0f;
     }
 }
