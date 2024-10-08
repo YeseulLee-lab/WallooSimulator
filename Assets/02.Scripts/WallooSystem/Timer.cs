@@ -7,8 +7,10 @@ using System;
 
 public class Timer : MonoBehaviour
 {
+    [Header("----------UI----------")]
     private TextMeshProUGUI _timeTMP;
 
+    [Header("----------UI----------")]
     //ÃÑ ±Ù¹«½Ã°£
     private float _time = 0f;
     private readonly Action _onTick;
@@ -16,12 +18,16 @@ public class Timer : MonoBehaviour
     private int _minute;
     private int _hour;
 
+    #region Unity Life Cycle
     private void Start()
     {
         _timeTMP = GetComponent<TextMeshProUGUI>();
         CalculateTime(0f);
+        WallooManager.instance._workStateChangedAction = () => StartTimer();
     }
+    #endregion
 
+    #region Timer
     public void StartTimer()
     {
         UniTimer().Forget();
@@ -59,4 +65,5 @@ public class Timer : MonoBehaviour
             }
         }
     }
+    #endregion
 }

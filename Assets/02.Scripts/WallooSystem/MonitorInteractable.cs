@@ -4,25 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR;
 
 public class MonitorInteractable : Interactable
 {
     [SerializeField]
     private Image black;
 
-    private Transform initialTransform;
-
-    private void Start()
+    #region Unity Life Cycle
+    protected override void Start()
     {
-        selectEntered.AddListener(PlayWallooAction);
-        selectExited.AddListener(SelectExit);
-
-        initialTransform = transform;
+        base.Start();
+        
+        _interactableData = new InteractableData("모니터", 0f, 0, 0f, 0f);
     }
+    #endregion
 
     public override void PlayWallooAction(SelectEnterEventArgs args)
     {
+        base.PlayWallooAction(args);
+
         Debug.Log("모니터 켜짐");
 
         GetComponent<BoxCollider>().enabled = false;
@@ -36,18 +36,12 @@ public class MonitorInteractable : Interactable
         WallooManager.instance.isWorkStart = true;
     }
 
-    public void SelectExit(SelectExitEventArgs args)
-    {
-        Debug.Log("선택 취소");
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 0)
         {
-            gameObject.transform.position = initialTransform.position;
-            gameObject.transform.rotation = initialTransform.rotation;
+            gameObject.transform.position = originTransform.position;
+            gameObject.transform.rotation = originTransform.rotation;
         }
     }
 }

@@ -1,26 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class WallooManager : MonoBehaviour
 {
-    [Header("GUI")]
-    [SerializeField]
-    private TextMeshProUGUI _wallooScoreText;
-    [SerializeField]
-    private Button _youtubeBtn;
-    [SerializeField]
-    private Button _workBtn;
-    [SerializeField]
-    private Button _offBtn;
-
-    [Header("Timer")]
-    [SerializeField]
-    private Timer _timer;
-
     public static WallooManager instance;
 
     private Interactable _curWallooInteractable;
@@ -48,6 +34,7 @@ public class WallooManager : MonoBehaviour
         set
         {
             _doubtRate = value;
+            _doubtRateChangedAction?.Invoke(_doubtRate);
         }
     }
 
@@ -61,10 +48,7 @@ public class WallooManager : MonoBehaviour
         set
         {
             _isWorkStart = value;
-            if (_isWorkStart)
-            {
-                _timer.StartTimer();
-            }
+            _workStateChangedAction?.Invoke();
         }
     }
 
@@ -81,6 +65,9 @@ public class WallooManager : MonoBehaviour
         }
     }
 
+    public Action _workStateChangedAction{ private get; set; }
+    public Action<float> _doubtRateChangedAction { private get; set; }
+
     #region Unity Life Cycle
     private void Awake()
     {
@@ -89,13 +76,11 @@ public class WallooManager : MonoBehaviour
 
     private void Start()
     {
-        Init();
+        InitData();
     }
-
     #endregion
 
-    private void Init()
+    private void InitData()
     {
-        _wallooScoreText.text = "월루 점수: " + _wallooScore;
     }
 }
