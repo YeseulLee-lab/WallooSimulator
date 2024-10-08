@@ -1,16 +1,14 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class KeyboardInteractable : Interactable
+public class KeyboardInteractable : CustomInteractableBase
 {
     protected override void Start()
     {
         base.Start();
-
-        _interactableData = new InteractableData("Å°º¸µå", 0f, 0, -22f, 20f);
     }
 
-    public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
+    /*public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
     {
         base.ProcessInteractable(updatePhase);
 
@@ -18,7 +16,7 @@ public class KeyboardInteractable : Interactable
         {
             _animator.SetBool("isWallooing", isSelected && _isWallooing);
         }
-    }
+    }*/
 
     public override void PlayWallooAction(SelectEnterEventArgs args)
     {
