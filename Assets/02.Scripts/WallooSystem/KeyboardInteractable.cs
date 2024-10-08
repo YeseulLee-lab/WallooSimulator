@@ -16,11 +16,7 @@ public class KeyboardInteractable : Interactable
 
         if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Dynamic)
         {
-            if (_coolTimeCancel.IsCancellationRequested)
-            {
-                if (isSelected)
-                    Debug.Log("타자치는중");
-            }
+            _animator.SetBool("isWallooing", isSelected && _isWallooing);
         }
     }
 

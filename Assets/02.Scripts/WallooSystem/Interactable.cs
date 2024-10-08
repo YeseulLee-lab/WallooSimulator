@@ -10,8 +10,9 @@ public class Interactable : XRBaseInteractable
     //오브젝트 데이터
     public InteractableData _interactableData;
     protected Transform originTransform;
+    protected bool _isWallooing;
 
-    private Animator _animator;
+    protected Animator _animator;
 
     //coolTime
     protected float _curCoolTime = 0f;
@@ -31,17 +32,11 @@ public class Interactable : XRBaseInteractable
     #region Interact
     public virtual void PlayWallooAction(SelectEnterEventArgs args)
     {
-        if (WallooManager.instance.isWallooing)
-        {
-            return;
-        }
-
-        WallooManager.instance.isWallooing = true;
-
         //쿨타임이 다 찼으면 월루 행동 가능
         if (_curCoolTime <= 0f)
         {
             Debug.Log("월루 행동시작");
+            _isWallooing = true;
             if (_animator != null)
                 _animator.enabled = true;
 
@@ -53,10 +48,9 @@ public class Interactable : XRBaseInteractable
         }
     }
 
+    //Grip 버튼 Up
     public virtual void SelectExit(SelectExitEventArgs args)
     {
-        WallooManager.instance.isWallooing = false;
-
         if (_animator != null)
             _animator.enabled = false;
     }
@@ -69,15 +63,23 @@ public class Interactable : XRBaseInteractable
         {
             if (_coolTimeCancel.IsCancellationRequested)
             {
-                Debug.Log("unitask 취소");
-                _curCoolTime = 0f;
-                break;
+                return;
             }
 
-            //총 쿨타임 만큼 _curCoolTime 플러스
-            await UniTask.Delay(TimeSpan.FromSeconds(1f), _curCoolTime >= _interactableData.coolTime, cancellationToken: _coolTimeCancel.Token);
-            _curCoolTime += 1f;
-            Debug.Log(_interactableData.name + "쿨타임: " + _curCoolTime);
+            if (_curCoolTime < _interactableData.coolTime)
+            {
+                //총 쿨타임 만큼 _curCoolTime 플러스
+                await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: _coolTimeCancel.Token);
+                _curCoolTime += 1f;
+                Debug.Log(_interactableData.name + "쿨타임: " + _curCoolTime);
+            }
+            else
+            {
+                _coolTimeCancel.Cancel();
+                Debug.Log("unitask 취소");
+                _curCoolTime = 0f;
+                _isWallooing = false;
+            }
         }
     }
     #endregion
@@ -87,15 +89,15 @@ public class Interactable : XRBaseInteractable
 public class InteractableData
 {
     private string _name;
-    private float _wallooTime;
+    private float _skipTime;
     private int _wallooScore;
     private float _doubtRate;
     private float _coolTime;
 
-    public InteractableData(string name, float wallooTime, int wallooScore, float doubtRate, float coolTime)
+    public InteractableData(string name, float skipTime, int wallooScore, float doubtRate, float coolTime)
     {
         _name = name;
-        _wallooTime = wallooTime;
+        _skipTime = skipTime;
         _wallooScore = wallooScore;
         _doubtRate = doubtRate;
         _coolTime = coolTime;
@@ -106,11 +108,11 @@ public class InteractableData
         get { return _name; }
     }
 
-    public float wallooTime
+    public float skipTime
     {
         get
         {
-            return _wallooTime;
+            return _skipTime;
         }
     }
 
