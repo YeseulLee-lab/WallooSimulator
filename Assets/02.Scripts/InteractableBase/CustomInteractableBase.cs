@@ -4,7 +4,6 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(XRSimpleInteractable))]
 public class CustomInteractableBase : MonoBehaviour
 {
     //오브젝트 데이터
@@ -23,8 +22,8 @@ public class CustomInteractableBase : MonoBehaviour
     protected virtual void Start()
     {
         _animator = GetComponent<Animator>();
-        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(PlayWallooAction);
-        GetComponent<XRSimpleInteractable>().selectExited.AddListener(SelectExit);
+        GetComponent<XRBaseInteractable>().selectEntered.AddListener(PlayWallooAction);
+        GetComponent<XRBaseInteractable>().selectExited.AddListener(SelectExit);
 
         originTransform = transform;
     }
@@ -38,6 +37,7 @@ public class CustomInteractableBase : MonoBehaviour
         {
             Debug.Log("월루 행동시작");
             _isWallooing = true;
+            WallooManager.instance.doubtRate += _interactableData.doubtRate;
             if (_animator != null)
                 _animator.enabled = true;
 
@@ -54,6 +54,18 @@ public class CustomInteractableBase : MonoBehaviour
     {
         if (_animator != null)
             _animator.SetBool("isWallooing", false);
+
+        GetComponent<XRBaseInteractable>().selectEntered.RemoveAllListeners();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //바닥에 닿으면 원래자리로 돌아감
+        if (collision.gameObject.layer == 0)
+        {
+            gameObject.transform.position = originTransform.position;
+            gameObject.transform.rotation = originTransform.rotation;
+        }
     }
     #endregion
 
