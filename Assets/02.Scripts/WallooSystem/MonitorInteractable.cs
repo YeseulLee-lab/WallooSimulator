@@ -36,8 +36,25 @@ public class MonitorInteractable : CustomInteractableBase
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.F1))
         {
+            //쿨타임이 다 찼으면 월루 행동 가능
+            if (_curCoolTime <= 0f)
+            {
+                Debug.Log("월루 행동시작");
+                _isWallooing = true;
+                WallooManager.instance.doubtRate += _interactableData.doubtRate;
+                WallooManager.instance.wallooScore += _interactableData.wallooScore;
+                if (_animator != null)
+                    _animator.enabled = true;
+
+                UniCoolTime().Forget();
+            }
+            else
+            {
+                Debug.Log("아직 쿨타임이 안찼습니다.");
+            }
+
             black.DOFade(0f, 0.8f).OnComplete(() =>
             {
                 black.gameObject.SetActive(false);

@@ -65,7 +65,7 @@ public class Timer : MonoBehaviour
             if (_time < 32400f)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: _workTimeCTS.Token);
-                _time += 600f;
+                _time += 6f;
                 CalculateTime(_time);
                 _onTick?.Invoke();
             }

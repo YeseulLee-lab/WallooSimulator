@@ -71,12 +71,13 @@ public class CustomInteractableBase : MonoBehaviour
     #endregion
 
     #region CoolTime
-    async UniTaskVoid UniCoolTime()
+    public async UniTaskVoid UniCoolTime()
     {
         while (_interactableData.coolTime > 0f)
         {
             if (_coolTimeCancel.IsCancellationRequested)
             {
+                _coolTimeCancel = new CancellationTokenSource();
                 return;
             }
 
