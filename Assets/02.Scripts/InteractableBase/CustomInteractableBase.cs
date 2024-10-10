@@ -38,6 +38,7 @@ public class CustomInteractableBase : MonoBehaviour
             Debug.Log("월루 행동시작");
             _isWallooing = true;
             WallooManager.instance.doubtRate += _interactableData.doubtRate;
+            WallooManager.instance.wallooScore += _interactableData.wallooScore;
             if (_animator != null)
                 _animator.enabled = true;
 

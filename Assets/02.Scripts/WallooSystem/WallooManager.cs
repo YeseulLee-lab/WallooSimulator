@@ -21,6 +21,7 @@ public class WallooManager : MonoBehaviour
         set
         {
             _wallooScore = value;
+            _wallooScoreChangedAction?.Invoke(_wallooScore);
         }
     }
 
@@ -75,6 +76,7 @@ public class WallooManager : MonoBehaviour
 
     public Action _workStateChangedAction{ private get; set; }
     public Action<float> _doubtRateChangedAction { private get; set; }
+    public Action<float> _wallooScoreChangedAction{ private get; set; }
 
     #region Unity Life Cycle
     private void Awake()

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 
 public class Timer : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Timer : MonoBehaviour
 
     private int _minute;
     private int _hour;
+
+    private CancellationTokenSource _workTimeCTS = new CancellationTokenSource();
 
     #region Unity Life Cycle
     private void Start()
@@ -55,13 +58,21 @@ public class Timer : MonoBehaviour
     {
         while (true)
         {
+            if(_workTimeCTS.IsCancellationRequested)
+                return;
+
             //총 근무시간이 9시간 미만이면
             if (_time < 32400f)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(1f));
-                _time += 6f;
+                await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: _workTimeCTS.Token);
+                _time += 600f;
                 CalculateTime(_time);
                 _onTick?.Invoke();
+            }
+            else
+            {
+                Debug.Log("근무 종료");
+                _workTimeCTS.Cancel();
             }
         }
     }

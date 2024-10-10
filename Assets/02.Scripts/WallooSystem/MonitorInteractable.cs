@@ -33,4 +33,18 @@ public class MonitorInteractable : CustomInteractableBase
         //모니터를 켜야 일 시작함
         WallooManager.instance.isWorkStart = true;
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            black.DOFade(0f, 0.8f).OnComplete(() =>
+            {
+                black.gameObject.SetActive(false);
+            });
+
+            //모니터를 켜야 일 시작함
+            WallooManager.instance.isWorkStart = true;
+        }
+    }
 }

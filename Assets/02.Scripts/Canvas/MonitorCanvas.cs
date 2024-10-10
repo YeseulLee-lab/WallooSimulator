@@ -24,11 +24,17 @@ public class MonitorCanvas : MonoBehaviour
     private void Start()
     {
         Init();
+        WallooManager.instance._wallooScoreChangedAction = (score) => UpdateWallooScore(score);
     }
     #endregion
 
     private void Init()
     {
         _wallooScoreText.text = "월루 점수: " + WallooManager.instance.wallooScore;
+    }
+
+    private void UpdateWallooScore(float wallooScore)
+    {
+        _wallooScoreText.text = "월루 점수: " + wallooScore;
     }
 }
