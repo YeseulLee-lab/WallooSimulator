@@ -22,7 +22,7 @@ public class CustomInteractableBase : MonoBehaviour
     protected virtual void Start()
     {
         _animator = GetComponent<Animator>();
-        GetComponent<XRBaseInteractable>().selectEntered.AddListener(PlayWallooAction);
+        //GetComponent<XRBaseInteractable>().selectEntered.AddListener(PlayWallooAction);
         GetComponent<XRBaseInteractable>().selectExited.AddListener(SelectExit);
 
         originTransform = transform;
@@ -40,7 +40,11 @@ public class CustomInteractableBase : MonoBehaviour
             WallooManager.instance.doubtRate += _interactableData.doubtRate;
             WallooManager.instance.wallooScore += _interactableData.wallooScore;
             if (_animator != null)
+            {
+                _animator.SetBool("isWallooing", true);
                 _animator.enabled = true;
+            }
+                
 
             UniCoolTime().Forget();
         }
