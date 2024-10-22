@@ -30,11 +30,11 @@ public class MonitorCanvas : MonoBehaviour
 
     private void Init()
     {
-        _wallooScoreText.text = "월루 점수: " + WallooManager.instance.wallooScore;
+        _wallooScoreText.text = WallooManager.instance.wallooScore.ToString();
     }
 
     private void UpdateWallooScore(float wallooScore)
     {
-        _wallooScoreText.text = "월루 점수: " + wallooScore;
+        _wallooScoreText.text = wallooScore.ToString();
     }
 }
