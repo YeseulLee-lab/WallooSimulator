@@ -19,3 +19,13 @@
 11	1127	7476552172704362	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d400cc80a2392a13
 2	1138	7476552173449371	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	53ff199734a5046
 1138	1553	7476552176757705	D:/UnityProject/WallooSimulator/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/86y3p5e4/obj/arm64-v8a/libgame.so	265011bd7da1ff3a
+37	179	7513599458134601	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	f2cc0763ec6e0a73
+180	360	7513599459410038	D:/UnityProject/WallooSimulator/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/86y3p5e4/obj/arm64-v8a/libswappywrapper.so	4a69009f0f4f3feb
+15	1354	7513599469854061	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	f72947db7a62fd65
+31	1355	7513599469854061	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	936a709198672435
+0	1358	7513599469874018	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	bff45bd692cefda0
+26	1358	7513599469864025	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	8e5888d050bc175f
+5	1360	7513599469893947	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d400cc80a2392a13
+20	1360	7513599469864025	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6eb8cbbccdb486a6
+9	1361	7513599469893947	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	53ff199734a5046
+1361	1504	7513599471017352	D:/UnityProject/WallooSimulator/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/86y3p5e4/obj/arm64-v8a/libgame.so	265011bd7da1ff3a
