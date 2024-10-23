@@ -22,7 +22,7 @@ public class CustomInteractableBase : MonoBehaviour
     protected virtual void Start()
     {
         _animator = GetComponent<Animator>();
-        //GetComponent<XRBaseInteractable>().selectEntered.AddListener(PlayWallooAction);
+        GetComponent<XRBaseInteractable>().selectEntered.AddListener(PlayWallooAction);
         GetComponent<XRBaseInteractable>().selectExited.AddListener(SelectExit);
 
         originTransform = transform;
@@ -59,8 +59,6 @@ public class CustomInteractableBase : MonoBehaviour
     {
         if (_animator != null)
             _animator.SetBool("isWallooing", false);
-
-        GetComponent<XRBaseInteractable>().selectEntered.RemoveAllListeners();
     }
 
     private void OnCollisionEnter(Collision collision)

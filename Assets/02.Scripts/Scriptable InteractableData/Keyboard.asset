@@ -16,4 +16,4 @@ MonoBehaviour:
   _skipTime: 0
   _wallooScore: 5
   _doubtRate: -20
-  _coolTime: 20
+  _coolTime: 2

@@ -7,7 +7,7 @@ public class SoundEvent : MonoBehaviour
     [SerializeField]
     private AudioClip _clip;
 
-    private void PlaySound()
+    public void PlaySound()
     {
         AudioManager.instance.PlaySound(_clip);
     }
