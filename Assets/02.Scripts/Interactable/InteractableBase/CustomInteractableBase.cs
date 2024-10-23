@@ -12,6 +12,7 @@ public class CustomInteractableBase : MonoBehaviour
     protected Transform originTransform;
     protected bool _isWallooing;
 
+    [SerializeField]
     protected Animator _animator;
 
     //coolTime
@@ -21,7 +22,8 @@ public class CustomInteractableBase : MonoBehaviour
     #region Unity Life Cycle
     protected virtual void Start()
     {
-        _animator = GetComponent<Animator>();
+        if(GetComponent<Animator>() != null)
+            _animator = GetComponent<Animator>();
         GetComponent<XRBaseInteractable>().selectEntered.AddListener(PlayWallooAction);
         GetComponent<XRBaseInteractable>().selectExited.AddListener(SelectExit);
 
