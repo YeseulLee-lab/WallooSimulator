@@ -6,7 +6,7 @@ public class DrugInteractable : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "DrugPoint")
+        if (other.GetComponent<DrugPoint>() != null)
         {
             other.GetComponent<DrugPoint>().EnablePillObject();
         }
