@@ -15,12 +15,21 @@ public class WaterInteractable : CustomGrabInteractableBase
         {
             other.GetComponent<WaterPoint>()._plantAnimator.SetBool("isWallooing", true);
             AudioManager.instance.PlaySound(_waterAudioClip);
-            WaterToPlant();
+            WaterToPlant(true);
         }
     }
 
-    public void WaterToPlant()
+    private void OnTriggerExit(Collider other)
     {
-        _waterParticle.SetActive(true);
+        if (other.GetComponent<WaterPoint>() != null)
+        {
+            other.GetComponent<WaterPoint>()._plantAnimator.SetBool("isWallooing", false);
+            WaterToPlant(false);
+        }
+    }
+
+    public void WaterToPlant(bool _active)
+    {
+        _waterParticle.SetActive(_active);
     }
 }

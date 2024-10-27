@@ -39,8 +39,12 @@ public class CustomInteractableBase : MonoBehaviour
         {
             Debug.Log("월루 행동시작");
             _isWallooing = true;
-            WallooManager.instance.doubtRate += _interactableData.doubtRate;
-            WallooManager.instance.wallooScore += _interactableData.wallooScore;
+            if (_interactableData != null)
+            {
+                WallooManager.instance.doubtRate += _interactableData.doubtRate;
+                WallooManager.instance.wallooScore += _interactableData.wallooScore;
+            }
+                
             if (_animator != null)
             {
                 _animator.SetBool("isWallooing", true);
@@ -77,27 +81,30 @@ public class CustomInteractableBase : MonoBehaviour
     #region CoolTime
     public async UniTaskVoid UniCoolTime()
     {
-        while (_interactableData.coolTime > 0f)
+        if (_interactableData != null)
         {
-            if (_coolTimeCancel.IsCancellationRequested)
+            while (_interactableData.coolTime > 0f)
             {
-                _coolTimeCancel = new CancellationTokenSource();
-                return;
-            }
+                if (_coolTimeCancel.IsCancellationRequested)
+                {
+                    _coolTimeCancel = new CancellationTokenSource();
+                    return;
+                }
 
-            if (_curCoolTime < _interactableData.coolTime)
-            {
-                //총 쿨타임 만큼 _curCoolTime 플러스
-                await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: _coolTimeCancel.Token);
-                _curCoolTime += 1f;
-                Debug.Log(_interactableData.name + "쿨타임: " + _curCoolTime);
-            }
-            else
-            {
-                _coolTimeCancel.Cancel();
-                Debug.Log("unitask 취소");
-                _curCoolTime = 0f;
-                _isWallooing = false;
+                if (_curCoolTime < _interactableData.coolTime)
+                {
+                    //총 쿨타임 만큼 _curCoolTime 플러스
+                    await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: _coolTimeCancel.Token);
+                    _curCoolTime += 1f;
+                    Debug.Log(_interactableData.name + "쿨타임: " + _curCoolTime);
+                }
+                else
+                {
+                    _coolTimeCancel.Cancel();
+                    Debug.Log("unitask 취소");
+                    _curCoolTime = 0f;
+                    _isWallooing = false;
+                }
             }
         }
     }
