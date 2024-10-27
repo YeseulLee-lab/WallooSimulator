@@ -14,7 +14,7 @@ public class BagelInteractable : CustomGrabInteractableBase
         if (other.tag == "PlayerHead")
         {
             AudioManager.instance.PlaySound(_eatingAC);
-            gameObject.SetActive(false);
+            GetComponent<MeshRenderer>().enabled = false;
             _ateBagel.SetActive(true);
         }
     }
