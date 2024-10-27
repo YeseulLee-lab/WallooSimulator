@@ -43,7 +43,6 @@ public class SceneSwitcher : MonoBehaviour
 
     private void Start()
     {
-        SwitchScene(Define.SceneName.Office);
         Invoke(nameof(SetFrame), 1f);
     }
     #endregion
