@@ -78,7 +78,15 @@ public class WallooManager : MonoBehaviour
     public Action<float> _doubtRateChangedAction { private get; set; }
     public Action<float> _wallooScoreChangedAction{ private get; set; }
 
+    [SerializeField]
+    private AudioClip _asmr;
+
     #region Unity Life Cycle
+
+    private void OnEnable()
+    {
+        AudioManager.instance.PlayMusic(_asmr);
+    }
     private void Awake()
     {
         instance = this;
